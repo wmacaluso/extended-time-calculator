@@ -1,0 +1,16 @@
+Use the following how-to guide to run and package the javafx application
+
+http://www.zenjava.com/2012/11/24/from-zero-to-javafx-in-5-minutes/
+
+for licensing, use java.security namespace (specifically, java.security.Provider)
+
+http://docs.oracle.com/javase/7/docs/technotes/guides/security/crypto/CryptoSpec.html
+
+can just generate an md5 hash of user computer mac address or name, expiry date, any other info. will prevent copying
+
+# License key for XYZZY
+expiry-date=2009-01-01
+other-info=blah
+key=[md5 has of MAC address, expiry date, other-info]
+
+Use "MainClass.cs" to run jar from exe. Then, package using WiX, add a custom action for the msi installer to prevent duplication. Will prevent 95% of copying.

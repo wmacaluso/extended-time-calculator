@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.cell.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+        <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.stats.StatsTableController" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <children>
+                <VBox prefHeight="367.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <TableView fx:id="studentTimerStatsTable" prefHeight="337.0" prefWidth="600.0">
+                            <columns>
+                                <TableColumn prefWidth="86.0" text="Date">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="date" />
+                                    </cellValueFactory>
+                                </TableColumn>
+                                <TableColumn prefWidth="55.0" text="Exams">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="numTests" />
+                                    </cellValueFactory>
+                                </TableColumn>
+                                <TableColumn prefWidth="92.0" text="Time + 1/2">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="numTimeAndAHalf" />
+                                    </cellValueFactory>
+                                </TableColumn>
+                                <TableColumn minWidth="8.0" prefWidth="103.0" text="Double Time">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="numDoubleTime" />
+                                    </cellValueFactory>
+                                </TableColumn>
+                                <TableColumn prefWidth="71.0" text="Readers">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="numReaders" />
+                                    </cellValueFactory>
+                                </TableColumn>
+                                <TableColumn prefWidth="135.0" text="Word Processors">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="numWordProcessors" />
+                                    </cellValueFactory>
+                                </TableColumn>
+                                <TableColumn prefWidth="142.0" text="Voice Recognition">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="numVoiceRecog" />
+                                    </cellValueFactory>
+                                </TableColumn>
+                                <TableColumn minWidth="0.0" prefWidth="62.0" text="Scribes">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="numScribes" />
+                                    </cellValueFactory>
+                                </TableColumn>
+                                <TableColumn minWidth="0.0" prefWidth="62.0" text="Calculators">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="numCalculators" />
+                                    </cellValueFactory>
+                                </TableColumn>
+                                <TableColumn prefWidth="52.0" text="Other">
+                                    <cellValueFactory>
+                                        <PropertyValueFactory property="numOther" />
+                                    </cellValueFactory>
+                                </TableColumn>
+                            </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="20.0">
+                            <children>
+                                <Label text=" Start Date: " />
+                                <DatePicker fx:id="tableStartDate" prefHeight="25.0" prefWidth="131.0" />
+                                <Label text="End Date: ">
+                                    <padding>
+                                        <Insets left="10.0" />
+                                    </padding>
+                                </Label>
+                                <DatePicker fx:id="tableEndDate" prefHeight="25.0" prefWidth="131.0" />
+                                <Label text="Interval: ">
+                                    <padding>
+                                        <Insets left="10.0" />
+                                    </padding>
+                                </Label>
+                                <ComboBox fx:id="tableInterval" prefHeight="25.0" prefWidth="92.0" value="Day">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="Day" />
+                                            <String fx:value="Week" />
+                                            <String fx:value="Month" />
+                                            <String fx:value="Year" />
+                                        </FXCollections>
+                                    </items>
+                                </ComboBox>
+                                <Button fx:id="excelExport" alignment="CENTER_RIGHT" mnemonicParsing="false" text="Export to Excel">
+                                    <HBox.margin>
+                                        <Insets left="60.0" />
+                                    </HBox.margin>
+                                </Button>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>

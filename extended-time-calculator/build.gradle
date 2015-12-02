@@ -1,0 +1,122 @@
+buildscript {
+    repositories {
+        maven {
+            url 'https://plugins.gradle.org/m2/'
+        }
+    }
+    dependencies {
+        classpath 'gradle.plugin.edu.sc.seis.gradle:launch4j:1.5.4'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'com.peanuttech'
+version = '1.0-SNAPSHOT'
+
+description = """extended-time-calculator"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+configurations {
+    scpAntTask
+}
+
+repositories {
+        
+   flatDir {
+       dirs 'libs'
+   }
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+
+apply plugin: 'edu.sc.seis.launch4j'
+
+launch4j {
+    mainClassName = 'common.App'
+    icon = '../../src/main/resources/images/Extended Time Calculator.ico'
+}
+
+dependencies {
+
+    scpAntTask 'org.apache.ant:ant-jsch:1.7.1', 'jsch:jsch:0.1.29'
+
+    compile group: 'org.xerial', name: 'sqlite-jdbc', version:'3.7.2'
+    //compile group: 'com.javafxdialogs', name: 'javafxdialogs', version:'0.0.3'
+    compile name: 'javafxdialogs-0.0.3'
+    compile group: 'com.miglayout', name: 'miglayout-javafx', version:'4.2'
+    compile group: 'commons-lang', name: 'commons-lang', version:'2.6'
+    compile group: 'com.j256.ormlite', name: 'ormlite-jdbc', version:'4.48'
+    compile group: 'org.controlsfx', name: 'controlsfx', version:'8.20.8'
+    compile group: 'com.j256.ormlite', name: 'ormlite-core', version:'4.48'
+    compile group: 'org.slf4j', name: 'slf4j-api', version:'1.6.1'
+    compile group: 'org.slf4j', name: 'jcl-over-slf4j', version:'1.6.1'
+    compile group: 'org.slf4j', name: 'slf4j-log4j12', version:'1.6.1'
+    compile group: 'log4j', name: 'log4j', version:'1.2.16'
+    compile group: 'com.h2database', name: 'h2', version:'1.3.148'
+}
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Jar File Example',  
+            'Implementation-Version': version,
+            'Main-Class': 'common.App'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+task heatLaunch4j(type:Exec, dependsOn:'createExe'){
+    String heatTrialCmd = 'heat.exe dir "build\\launch4j" -gg -sfrag -template:fragment -cg launch4j -out launch4j.wxs'
+    commandLine 'cmd', '/c', heatTrialCmd
+}
+
+task candleLaunch4j(type:Exec, dependsOn:heatLaunch4j){
+    String candleTrialCmd = 'candle.exe -d"SolutionDir=..\\Extended Time Calculator Setup\\\\" -arch x86 -ext "WixUIExtension.dll" -ext "WixUtilExtension.dll" "launch4j.wxs" "TrialInstall.wxs"'
+    commandLine 'cmd', '/c', candleTrialCmd
+}
+
+task buildInstaller(type:Exec, dependsOn:candleLaunch4j){
+    String lightTrialCmd = 'light.exe launch4j.wixobj TrialInstall.wixobj -ext "WixUIExtension.dll" -ext "WixUtilExtension.dll" -out "Extended Time Calculator Setup Trial.msi" -b "build\\launch4j"'
+    commandLine 'cmd', '/c', lightTrialCmd
+}
+
+/*
+task ftp << {
+    ant {
+        taskdef(name: 'ftp',
+                classname: 'org.apache.tools.ant.taskdefs.optional.net.FTP',
+                classpath: configurations.scpAntTask.asPath)
+        ftp(server: "54.243.125.46",
+                userid: "ubuntu",
+                password: "sush1p1zzasteak",
+                remotedir:"/var/www/extendedtimecalculator/public_html/public") {
+            fileset(dir: "."){
+                include(name:"*.msi")
+            }
+        }
+    }
+}
+*/
+
+//http://mrhaki.blogspot.com/2009/12/gradle-goodness-using-optional-ant-task.html
+task scp(dependsOn:buildInstaller) << {
+    ant {
+        taskdef(name: 'scp',
+                classname: 'org.apache.tools.ant.taskdefs.optional.ssh.Scp',
+                classpath: configurations.scpAntTask.asPath)
+        scp(todir: 'ubuntu@54.243.125.46:/var/www/extendedtimecalculator/public_html/public',
+                passphrase: "sush1p1zzasteak",
+                knownhosts: "known_hosts",
+                trust: "true",
+                keyfile: "aws_key_pair.pem") {
+            fileset(dir: "."){
+                include(name:"*.msi")
+            }
+        }
+    }
+}

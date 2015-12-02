@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  <Product Id="*" Name="Extended Time Calculator" Language="1033" Version="1.0.0.0" Manufacturer="Peanut Technology" UpgradeCode="b8731a27-3b3b-4188-a76f-8508662b05fc">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <Media Id='1' Cabinet='ExtendedTimeCalculator.cab' EmbedCab='yes' />
+
+    <Feature Id="ProductFeature" Title="Extended Time Calculator" Level="1">
+      <ComponentGroupRef Id="launch4j" />
+      <ComponentRef Id="ApplicationShortcut" />  
+      <ComponentRef Id="ApplicationShortcutDesktop" /> 
+      <!--ComponentGroupRef Id="JRE_Runtime"/>
+      <ComponentGroupRef Id="TestTimerGroup"/>
+
+      <ComponentRef Id="INSTALLFOLDER_Permission" /--> 
+    </Feature>
+    
+    <Icon Id="ExtendedTimeCalculator.ico" SourceFile="$(var.SolutionDir)Extended Time Calculator.ico" />
+    <Property Id="ARPPRODUCTICON" Value="ExtendedTimeCalculator.ico" />
+
+    <UIRef Id="WixUI_Mondo" />
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+       <Directory Id="DesktopFolder" Name="Desktop">
+      </Directory>      
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLLOCATION" Name="Peanut Technology" />
+
+          <Directory Id="ProgramMenuFolder">
+              <Directory Id="ApplicationProgramsFolder" Name="Extended Time Calculator"/>
+          </Directory>
+        </Directory>
+    </Directory>
+    <!-- 
+    Set the default install location to the value of 
+    INSTALLLOCATION (usually c:\Program Files\YourProductName) 
+    -->
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
+  </Product>
+
+  <Fragment>
+
+
+
+        <!-- Step 2: Add the shortcut to your installer package -->
+        <DirectoryRef Id="ApplicationProgramsFolder">
+            <Component Id="ApplicationShortcut" Guid="{88E4EB3A-9828-472E-8B8C-9D108B7D3A05}">
+                <Shortcut Id="ApplicationStartMenuShortcut" 
+                     Name="Extended Time Calculator" 
+                   Description="Calculator for Extended Time Exams"
+                    Target="[#filB835D7A396BDA1E0537B9ECC7FB18F60]"
+                          WorkingDirectory="APPLICATIONROOTDIRECTORY"/>
+                <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+                <RegistryValue Root="HKCU" Key="Software\Microsoft\Extended Time Calculator" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+           </Component>
+        </DirectoryRef>
+
+        <DirectoryRef Id="DesktopFolder">
+          <Component Id="ApplicationShortcutDesktop" Guid="*">
+            <Shortcut Id="ApplicationDesktopShortcut"
+               Name="Extended Time Calculator"
+               Description="Extended Time Calculator"
+               Target="[dir53A9C1326663FBC3711401AEC4527851]Extended Time Calculator.exe"
+               WorkingDirectory="dir53A9C1326663FBC3711401AEC4527851"/>
+            <RemoveFolder Id="DesktopFolder" On="uninstall"/>
+            <RegistryValue
+              Root="HKCU"
+              Key="Software/Extended Time Calculaotr"
+              Name="installed"
+              Type="integer"
+              Value="1"
+              KeyPath="yes"/>
+        </Component>
+      </DirectoryRef>
+
+    </Fragment>
+  
+</Wix>

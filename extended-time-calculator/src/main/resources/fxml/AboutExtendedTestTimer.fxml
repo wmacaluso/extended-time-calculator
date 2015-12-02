@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="310.0" prefWidth="503.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <VBox prefHeight="302.0" prefWidth="432.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="@/images/PeanutTechnologyLogoWithTitle.png" />
+          </image>
+        </ImageView>
+            <Hyperlink text="http://www.peanuttechnology.com" />
+        <TextArea disable="false" editable="false" prefWidth="431.9999000000025" text="Extended Test Timer, Version 1.0&#10;Copyright 2014, Peanut Technology&#10;&#10;If you have any questions, comments or suggestions, we would love to hear from you!&#10;&#10;contact@peanuttechnology.com" wrapText="true" />
+      </children>
+    </VBox>
+  </children>
+</AnchorPane>

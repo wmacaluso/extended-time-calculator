@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.cell.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+        <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.stats.ChartController" minHeight="180.0" minWidth="200.0" prefHeight="180.0" prefWidth="200.0">
+            <children>
+                <VBox layoutX="236.0" layoutY="68.0" prefHeight="367.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <LineChart fx:id="lineChart" prefHeight="507.0" prefWidth="600.0">
+                            <xAxis>
+                                <CategoryAxis side="BOTTOM" />
+                            </xAxis>
+                            <yAxis>
+                                <NumberAxis side="LEFT" />
+                            </yAxis>
+                        </LineChart>
+                        <FlowPane prefHeight="200.0" prefWidth="200.0">
+                            <children>
+                                <HBox alignment="CENTER" prefHeight="25.0" prefWidth="598.0">
+                                    <children>
+                                        <Label text=" Start Date: " />
+                                        <DatePicker fx:id="lineChartStartDate" prefHeight="25.0" prefWidth="131.0" />
+                                        <Label text="End Date: ">
+                                            <padding>
+                                                <Insets left="10.0" />
+                                            </padding>
+                                        </Label>
+                                        <DatePicker fx:id="lineChartEndDate" prefHeight="25.0" prefWidth="131.0" />
+                                        <Label text="Interval: ">
+                                            <padding>
+                                                <Insets left="10.0" />
+                                            </padding>
+                                        </Label>
+                                        <ComboBox fx:id="lineChartInterval" prefHeight="25.0" prefWidth="92.0">
+                                            <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                    <String fx:value="Day" />
+                                                    <String fx:value="Week" />
+                                                    <String fx:value="Month" />
+                                                    <String fx:value="Year" />
+                                                </FXCollections>
+                                            </items>
+                                            <value>
+                                                <String fx:value="Day" />
+                                            </value>
+                                        </ComboBox>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </FlowPane>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
