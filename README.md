@@ -1,29 +1,22 @@
-# README #
+# Extended Time Calculator #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Extended time calculator is small application that is useful for timing exams for students with disabilities. These student often require extended time, and it can be difficult to manage multiple exams simultaneously when they all require different amounts of extended time.
 
-### What is this repository for? ###
+It also allows users to add accommodations, and view statistics regarding past exams.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
-### How do I get set up? ###
+### Pre-requisites for build
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+* WiX toolset
+* Latest JDK
+* Gradle
+* Windows box for compilation
 
-### Contribution guidelines ###
+### Installation ###
 
-* Writing tests
-* Code review
-* Other guidelines
+```
+cd extended-time-calculator
+gradle buildInstaller
+```
 
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+This will output a msi installer in the extended-time-calculator directory
