@@ -15,7 +15,6 @@ It also allows users to add accommodations, and view statistics regarding past e
 ### Installation ###
 
 ```
-cd extended-time-calculator
 gradle buildInstaller
 ```
 
