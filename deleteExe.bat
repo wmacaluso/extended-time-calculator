@@ -1,1 +1,0 @@
-del "%~dp0extended-time-calculator\target\jfx\native\Extended Time Calculator\Extended Time Calculator.exe"

@@ -1,1 +1,0 @@
-heat dir "..\extended-time-calculator\target\jfx\native\Extended Time Calculator" -gg -sfrag -template:fragment -out "..\extendedTimeCalculator.wxs" -cg TestTimerGroup -dr INSTALLLOCATION -var var.testTimerSourceDir
