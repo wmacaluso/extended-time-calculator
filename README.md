@@ -9,9 +9,9 @@ It also allows users to add accommodations, and view statistics regarding past e
 
 ### Pre-requisites for build
 
-* WiX toolset
-* Latest JDK
-* Gradle
+* [WiX toolset](http://wixtoolset.org/)
+* [Latest JDK](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html)
+* [Gradle](https://gradle.org/)
 * Windows box for compilation
 
 ### Installation ###
